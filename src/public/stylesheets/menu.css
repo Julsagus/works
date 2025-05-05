@@ -14,7 +14,10 @@ h1 {
     margin: 80px 0; 
 }
 
-
+a {
+    text-decoration: none;
+  }
+  
 .barra {
     display: flex;
     justify-content: space-around;
