@@ -9,45 +9,52 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ContactsController = void 0;
-const ContactsModel_1 = require("../models/ContactsModel");
-class ContactsController {
+exports.PaymentsController = void 0;
+const PaymentModel_1 = require("../models/PaymentModel");
+class PaymentsController {
     constructor() {
-        this.model = new ContactsModel_1.ContactsModel();
+        this.model = new PaymentModel_1.PaymentModel();
     }
-    add(req, res) {
+    processPayment(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const ipAddress = req.ip || req.connection.remoteAddress || '';
-                yield this.model.addContact({
+                const paymentData = {
+                    service: req.body.service,
                     email: req.body.email,
-                    name: req.body.name,
-                    comment: req.body.comment,
+                    cardName: req.body.cardName,
+                    cardNumber: req.body.cardNumber,
+                    expMonth: parseInt(req.body.expMonth),
+                    expYear: parseInt(req.body.expYear),
+                    cvv: req.body.cvv,
+                    amount: parseFloat(req.body.amount),
+                    currency: req.body.currency,
                     ipAddress: ipAddress
-                });
-                res.redirect('/confirmacion');
+                };
+                yield this.model.createPayment(paymentData);
+                res.redirect('/exito');
             }
             catch (error) {
-                console.error('Error al guardar contacto:', error);
-                res.status(500).render('error', {
-                    message: 'Ocurrió un error al procesar tu mensaje'
+                console.error('Error processing payment:', error);
+                res.status(500).render('payment-error', {
+                    message: 'Ocurrió un error al procesar el pago'
                 });
             }
         });
     }
-    list(req, res) {
+    listPayments(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const contacts = yield this.model.getAllContacts();
-                res.render('contactlist', { contacts });
+                const payments = yield this.model.getAllPayments();
+                res.render('paymentlist', { payments });
             }
             catch (error) {
-                console.error('Error al listar contactos:', error);
+                console.error('Error listing payments:', error);
                 res.status(500).render('error', {
-                    message: 'Error al cargar la lista de contactos'
+                    message: 'Error al cargar los pagos'
                 });
             }
         });
     }
 }
-exports.ContactsController = ContactsController;
+exports.PaymentsController = PaymentsController;

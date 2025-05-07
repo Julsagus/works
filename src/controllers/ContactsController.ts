@@ -31,7 +31,7 @@ export class ContactsController {
     async list(req: Request, res: Response) {
         try {
             const contacts = await this.model.getAllContacts();
-            res.render('list', { contacts });
+            res.render('contactlist', { contacts });
         } catch (error) {
             console.error('Error al listar contactos:', error);
             res.status(500).render('error', { 

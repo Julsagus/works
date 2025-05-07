@@ -45,6 +45,15 @@ a {
   transition: all .4s ease-in-out;
 }
 
+#btnprin:hover {
+  scale: 0.95;
+  background-color: rebeccapurple;
+}
+
+#btnprin a:hover {
+  color: white;
+}
+
 .bienvenida {
   font-size: 60px;
   position: relative; 

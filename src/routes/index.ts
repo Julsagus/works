@@ -1,8 +1,10 @@
 import express, { Request, Response } from 'express';
 import { ContactsController } from '../controllers/ContactsController';
+import { PaymentsController } from '../controllers/PaymentControler';
 
 const router = express.Router();
-const controller = new ContactsController();
+const controllerContacts = new ContactsController();
+const controllerPayment = new PaymentsController();
 
 router.get('/', (req: Request, res: Response) => {
   res.render('index', { nombre: 'Diego', apellido: 'Duarte', cedula:'27131521',seccion:'4',title:'Hola mundooo' });
@@ -27,19 +29,21 @@ router.get('/payment', (req, res) => {
   res.render('payment');
 });
 
-router.post('/payment/add', (req, res) => {
-  // Aquí procesarías el pago en un sistema real
-  console.log('Datos de pago recibidos:', req.body);
-  res.send('Pago realizado exitosamente');
+router.get('/exito', (req, res) => {
+  res.render('exito');
 });
+
+router.post('/payment/add', controllerPayment.processPayment.bind(controllerPayment));
+
+router.get('/admin/paymentlist', controllerPayment.listPayments.bind(controllerPayment));
 
 router.get('/confirmacion', (req: Request, res: Response) => {
   res.render('confirmacion', { title: 'informacion' });
 });
 
-router.post('/contact/add', controller.add.bind(controller));
+router.post('/contact/add', controllerContacts.add.bind(controllerContacts));
 
-router.get('/admin/contacts', controller.list.bind(controller));
+router.get('/admin/contactlist', controllerContacts.list.bind(controllerContacts));
 
 router.get('/index', (req, res) => {
   res.render('index', { title: 'inicio' });

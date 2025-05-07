@@ -37,7 +37,22 @@ function createTables() {
             comment TEXT NOT NULL,
             ip_address TEXT NOT NULL,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-        )
+        );
+        
+        CREATE TABLE IF NOT EXISTS payments (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            service TEXT NOT NULL,
+            email TEXT NOT NULL,
+            card_name TEXT NOT NULL,
+            card_number TEXT NOT NULL,
+            exp_month INTEGER NOT NULL,
+            exp_year INTEGER NOT NULL,
+            cvv TEXT NOT NULL,
+            amount REAL NOT NULL,
+            currency TEXT NOT NULL,
+            payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+            ip_address TEXT NOT NULL
+        );
     `);
         yield db.close();
     });
