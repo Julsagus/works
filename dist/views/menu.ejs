@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>platillos del taller</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/stylesheets/menu.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    
+        
+    <div class="barra">
+        <a href="/index" class="opcion">Inicio</a>
+        <a href="/informacion" class="opcion">informacion</a>
+        <a href="/payment" class="opcion">pago</a>
+        <a href="/contact" class="opcion">comentarios</a>
+        <a href="/admin/contactlist" class="opcion">registrados</a>
+        <a href="/empresa" class="opcion">empresa</a>
+        
+    </div>
+
+
+<h1>SERVICIOS</h1>
+
+<div class="contenedor"> 
+    <div class="galeria">
+        <div class="item">
+            <img class="imagen" src="/images/carron.jpeg" alt="Plato 1" />
+            <h3>Taxi</h3>
+            <p>con ziggo te garantizamos un taxi a cualquier lugar que vayas</p>
+            <p class="hora">horario:9am</p>
+            <button class="selection"><a href="/payment">Seleccionar</a></button>
+        </div>
+        <div class="item">
+            <img class="imagen" src="/images/buson.jpeg" alt="Plato 2" />
+            <h3>Autobus privado</h3>
+            <p>Autobuses privaos disponibles siempre para llegar a tu destino soñado</p>
+            <p class="hora">horario: 12pm</p>
+            <button class="selection"><a href="/payment">Seleccionar</a></button>
+        </div>
+        <div class="item">
+            <img class="imagen" src="/images/moton.jpeg" alt="Plato 3" />
+            <h3>Moto Taxi</h3>
+            <p>Moto taxis disponibles a cualquier hora</p>
+            <p class="hora">horario:1pm</p>
+            <button class="selection"><a href="/payment">Seleccionar</a></button>
+        </div>
+       
+    </div>
+</div>
+<%- include('footer') %>
+</body>
+</html>

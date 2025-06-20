@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios de Taxi | Transporte Seguro</title>
+    <style>
+        :root {
+            --azul-claro: #e0f7fa;
+            --azul-medio: #4fc3f7;
+            --azul-oscuro: #01579b;
+            --amarillo: #ffeb3b;
+            --sombra: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --brillo: 0 0 20px rgba(255, 235, 59, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--azul-claro), #b2ebf2);
+            color: var(--azul-oscuro);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .barra {
+            background: linear-gradient(145deg, var(--azul-oscuro), #0277bd);
+            padding: 1.5rem 0;
+            box-shadow: var(--sombra);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .opcion {
+            color: var(--amarillo);
+            text-decoration: none;
+            font-weight: 700;
+            margin: 0.5rem 1.5rem;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            letter-spacing: 1.5px;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .opcion::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--amarillo);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .opcion:hover {
+            color: var(--azul-oscuro);
+            transform: translateY(-5px);
+            box-shadow: var(--brillo);
+            border-color: var(--amarillo);
+        }
+
+        .opcion:hover::before {
+            left: 0;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(1, 87, 155, 0.8), rgba(1, 87, 155, 0.6)), 
+             url('../images/3.jpeg');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            animation: slideIn 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .info-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--azul-oscuro);
+            margin-bottom: 2rem;
+            position: relative;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--amarillo);
+            border-radius: 2px;
+            box-shadow: var(--brillo);
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--sombra);
+            overflow: hidden;
+            width: 350px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: var(--azul-oscuro);
+            margin-bottom: 1rem;
+        }
+
+        .card-text {
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--amarillo);
+            color: var(--azul-oscuro);
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .car-slider {
+            width: 100%;
+            overflow: hidden;
+            margin: 4rem 0;
+            position: relative;
+        }
+
+        .car-track {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            width: calc(300px * 10);
+        }
+
+        .car-slide {
+            width: 300px;
+            margin: 0 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            transition: all 0.3s ease;
+        }
+
+        .car-slide:hover {
+            transform: scale(1.05);
+        }
+
+        .car-slide img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-300px * 5)); }
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--sombra);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--amarillo);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            color: var(--azul-oscuro);
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+          }
+          
+          footer .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          
+          footer .social-media a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+          }
+          
+          footer .social-media a:hover {
+            text-decoration: underline;
+          }
+          
+          footer .footer-info p {
+            margin: 5px 0;
+          }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 50vh;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .opcion {
+                margin: 0.3rem 0.8rem;
+                padding: 0.6rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="barra">
+        <a href="/index" class="opcion">Inicio</a>
+        <a href="/informacion" class="opcion">informacion</a>
+        <a href="/menu" class="opcion">talleres</a>
+        <a href="/payment" class="opcion">pago</a>
+        <a href="/contact" class="opcion">comentarios</a>
+        <a href="/empresa" class="opcion">empresa</a>
+        
+    </div>
+
+    <section class="hero">
+        <h1>Servicios de Taxi Premium</h1>
+        <p>Transporte seguro, rápido y confiable las 24 horas del día</p>
+    </section>
+
+    <section class="info-section">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        
+        <div class="card-container">
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1537041373298-55dbb337e651?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Taxi Ejecutivo">
+                </div>
+                <div class="card-content">
+                    <span class="badge">Premium</span>
+                    <h3 class="card-title">Taxi Ejecutivo</h3>
+                    <p class="card-text">Vehículos de lujo para clientes exigentes que buscan comodidad y estilo en sus traslados.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Transporte Aeropuerto">
+                </div>
+                <div class="card-content">
+                    <span class="badge">Recomendado</span>
+                    <h3 class="card-title">Transporte Aeropuerto</h3>
+                    <p class="card-text">Servicio puntual con seguimiento de vuelos y asistencia con equipaje incluida.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Servicio 24/7">
+                </div>
+                <div class="card-content">
+                    <span class="badge">Disponible</span>
+                    <h3 class="card-title">Servicio 24/7</h3>
+                    <p class="card-text">Disponibilidad permanente para atender tus necesidades de transporte a cualquier hora.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <h2 class="section-title">Nuestra Flota</h2>
+        
+        <div class="car-slider">
+            <div class="car-track">
+                <div class="car-slide">
+                    <img src="/images/1.jpeg" alt="primero" />
+                </div>
+                <div class="car-slide">
+                    <img src="/images/2.jpeg" alt="primero" />
+                </div>
+                <div class="car-slide">
+                    <img src="/images/3.jpeg" alt="primero" />
+                </div>
+                <div class="car-slide">
+                    <img src="/images/4.jpeg" alt="primero" />
+                </div>
+                <div class="car-slide">
+                    <img src="/images/1.jpeg" alt="primero" />
+                </div>
+                <div class="car-slide">
+                    <img src="/images/2.jpeg" alt="primero" />
+                </div>
+                <div class="car-slide">
+                    <img src="/images/3.jpeg" alt="primero" />
+                </div>
+                <div class="car-slide">
+                    <img src="/images/4.jpeg" alt="primero" />
+                </div>
+                <div class="car-slide">
+                    <img src="/images/1.jpeg" alt="primero" />
+                </div>
+                <div class="car-slide">
+                    <img src="/images/2.jpeg" alt="primero" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <h2 class="section-title">¿Por Qué Elegirnos?</h2>
+        
+        <div class="features"> 
+            <div class="feature">
+                <div class="feature-icon">🚕</div>
+                <h3 class="feature-title">Disponibilidad 24/7</h3>
+                <p>Servicio ininterrumpido los 365 días del año, siempre que nos necesites.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">⏱️</div>
+                <h3 class="feature-title">Tiempos de Espera Mínimos</h3>
+                <p>Nuestros taxis llegan en un promedio de 5-10 minutos en zonas urbanas.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">⭐</div>
+                <h3 class="feature-title">Conductores Certificados</h3>
+                <p>Profesionales con amplia experiencia y excelente conocimiento de la ciudad.</p>
+            </div>
+        </div>
+    </section>
+
+    <%- include('footer') %>
+
+</body>
+</html>
